@@ -16,8 +16,8 @@
   "license": "ISC",
   "dependencies": {
     "inquirer": "^5.0.1",
+    "node-spotify-api": "^1.0.7",
     "node-twitter-api": "^1.8.0",
-    "request": "^2.83.0",
-    "spotify": "^0.3.0"
+    "request": "^2.83.0"
   }
 }

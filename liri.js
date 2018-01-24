@@ -3,7 +3,7 @@ var myKeys = require("./keys.js");
 var request = require("request");
 var inquirer = require("inquirer");
 var twitterAPI = require('node-twitter-api');
-var spotify = require('spotify');
+var Spotify = require('node-spotify-api');
 
 var twitter = new twitterAPI({
     consumerKey: myKeys.consumer_key,
@@ -12,8 +12,11 @@ var twitter = new twitterAPI({
 	accessTokenSecret: myKeys.access_token_secret
 });
 
+var spotify = new Spotify({
+  id: myKeys.client_id,
+  secret: myKeys.client_secret
+});
 
-var params = "something"
 
 inquirer
   .prompt([
@@ -28,18 +31,7 @@ inquirer
   .then(function(inquirerResponse) {
 
 	if (inquirerResponse.options === "Print my latest 20 Tweets"){
-					twitter.verifyCredentials(twitter.accessToken, twitter.accessTokenSecret, params, function(error, data, response) {
-						if (error) {
-							//something was wrong with either accessToken or accessTokenSecret
-							//start over with Step 1
-						} else {
-							//accessToken and accessTokenSecret can now be used to make api-calls (not yet implemented)
-							//data contains the user-data described in the official Twitter-API-docs
-							//you could e.g. display his screen_name
-							console.log(response);
-							console.log(data["screen_name"]);
-						}
-					});
+					console.log("Currently broken...womp womp.");
 
 
  	}
@@ -65,8 +57,8 @@ inquirer
 
   						//replace this with reading from file
   						else {
-  							searchTerm = "Chickenman";
-  							console.log("You didn't enter anything...running search for chickenman...");
+  							track = "The Sign";
+  							console.log("You didn't enter anything...running search for: " + track);
   						}
 
 						spotify.search({ type: 'track', query: track }, function(err, data) {
@@ -74,7 +66,6 @@ inquirer
 						        console.log('Error occurred: ' + err);
 						        return;
 						    }
-						 
 						    console.log(data); 
 						});
 
